@@ -4,3 +4,6 @@ notebook/.ipynb_checkpoints/*
 imgs
 .DS_Store
 notebook/__pycache__/imgutils.cpython-36.pyc
+notebook/101first_fit/
+notebook/101nvss_fit/
+referencias/

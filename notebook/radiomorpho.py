@@ -29,13 +29,14 @@ def min_max_img(img):
       if(img[i,j] > max_b): max_b = img[i,j]
   return (min_b, max_b)
 
-def normalize_img(img):
+def normalize_img(img, as_int=False, max_val=255):
   min_b, max_b = min_max_img(img)
   range_b = max_b - min_b
   n_img = np.zeros_like(img, dtype=float)
   for i in range(img.shape[0]):
     for j in range(img.shape[1]):
       n_img[i, j] = (img[i, j] - min_b)/ range_b
+  if(as_int): n_img = sk.img_as_int(n_img * max_val)
   return n_img
 
 def readNormalizedImg(img):

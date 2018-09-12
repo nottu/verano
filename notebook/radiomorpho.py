@@ -44,6 +44,16 @@ def readNormalizedImg(img):
   while (len(f.shape) > 2): f = f[0]
   return normalize_img(f)
 
+def readNormalizedImgMix(img1, img2):
+  f1 = fits.open(img1)[0].data
+  f2 = fits.open(img2)[0].data
+  while (len(f1.shape) > 2): f1 = f1[0]
+  while (len(f2.shape) > 2): f2 = f2[0]
+  scale_fac = (f1.shape[0]/f2.shape[0] , f1.shape[1]/f2.shape[1])
+  f2r = sk.transform.rescale(f2, scale_fac, mode='reflect')
+  f3 = f1 + f2r
+  return normalize_img(f3)
+
 def img_area(img):
     area = 0
     for i in range(img.shape[0]):

@@ -75,3 +75,19 @@ def get_file_list(directory, ext):
 
 def transpose_mtx(mtx):
     return [[mtx[i][j] for i in range(len(mtx))] for j in range(len(mtx[0]))]
+
+
+def readImagesFromDirs(dirs):
+  files = transpose_mtx([get_file_list(dirs[i], 'fit') for i in range(len(dirs))])
+  images = []
+  names = []
+  for im in files:
+      try:
+          #could easily optimize reading process...
+          img = readNormalizedImgMix(im[0], im[1])
+          images.append([readNormalizedImg(im[0]), readNormalizedImg(im[1]), img])
+          names.append(im)
+      except:
+          print('error')
+  files = names
+  return files, np.array(images)

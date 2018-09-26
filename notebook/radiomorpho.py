@@ -50,7 +50,7 @@ def readNormalizedImgMix(img1, img2):
   while (len(f1.shape) > 2): f1 = f1[0]
   while (len(f2.shape) > 2): f2 = f2[0]
   scale_fac = (f1.shape[0]/f2.shape[0] , f1.shape[1]/f2.shape[1])
-  f2r = sk.transform.rescale(f2, scale_fac, mode='reflect')
+  f2r = sk.transform.rescale(f2, scale_fac, mode='reflect', multichannel=False, anti_aliasing=True)
   f3 = f1 + f2r
   return normalize_img(f3)
 
@@ -88,6 +88,6 @@ def readImagesFromDirs(dirs):
           images.append([readNormalizedImg(im[0]), readNormalizedImg(im[1]), img])
           names.append(im)
       except:
-          print('error')
+          print('error reading image {0} or {1}'.format(im[0], im[1]))
   files = names
   return files, np.array(images)

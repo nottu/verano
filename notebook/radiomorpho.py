@@ -48,9 +48,9 @@ def readNormalizedImgMix(img1, img2):
   f1 = readNormalizedImg(img1)
   f2 = readNormalizedImg(img2)
   scale_fac = (f1.shape[0]/f2.shape[0] , f1.shape[1]/f2.shape[1])
-  f2r = sk.transform.rescale(f2, scale_fac, mode='reflect')
-  # f3 = f1 + f2r
-  return normalize_img(f1)
+  f2r = sk.transform.rescale(f2, scale_fac, mode='reflect', multichannel=False, anti_aliasing=True)
+  f3 = f1 + f2r
+  return normalize_img(f3)
 
 def img_area(img):
     area = 0

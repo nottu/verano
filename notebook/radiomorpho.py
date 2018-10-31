@@ -60,12 +60,13 @@ def img_area(img):
     return area
 
 def get_open_close_info(im, sz):
+  o_area = img_area(im)
   a = np.zeros((2 * sz))
   for i in range(sz):
     im_c = morpho.opening(im, morpho.disk(i + 1))
-    a[i] = img_area(im_c)
+    a[i] = (o_area - img_area(im_c)) / o_area
     im_c = morpho.closing(im, morpho.disk(i + 1))
-    a[i + sz] = img_area(im_c)
+    a[i + sz] = (o_area - img_area(im_c)) / o_area
   return a
 
 def get_file_list(directory, ext):
